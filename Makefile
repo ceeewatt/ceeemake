@@ -5,6 +5,10 @@ include config.mk
 # The sort function is used here to remove duplicates.
 VPATH := ${sort ${dir ${SRCS}}}
 
+# Source code file extension; all source files are
+#  expected to have this extension.
+EXT ?= .c
+
 CPPFLAGS += \
 	${addprefix -I,${INCLUDE_DIRS}} \
 	${addprefix -D,${MACROS}}
@@ -52,7 +56,7 @@ ${RELEASE_DIR}/${EXE}: ${RELEASE_OBJS}
 # - A rule for compiling a source file to an object file.
 # - A rule for making the dependency file depend on the same prerequisites as the object file.
 # - Phony targets for each header file prerequisite, meant to prevent make from throwing errors if a header file is deleted.
-${DEP_DIR}/%.d: %.c
+${DEP_DIR}/%.d: %${EXT}
 	@set -e; rm -f $@; \
 	${CC} -MM -MP -MT '${BUILD_DIR}/%/${OBJ_DIR}/${addsuffix .o,${basename ${notdir $<}}}' ${CPPFLAGS} $< > $@.$$$$; \
 	sed -n '1p' $@.$$$$ > $@; \
