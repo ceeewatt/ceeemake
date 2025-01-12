@@ -1,5 +1,5 @@
 EXE := demo
-BUILD_DIR := build
+BUILD_DIR := .build
 
 SRCS := \
 	demo/src/a.c \
