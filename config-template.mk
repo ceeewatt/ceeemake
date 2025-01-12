@@ -1,19 +1,25 @@
-EXE := demo
+# Change if working in C++ project
+LANGUAGE := C
+
+ifeq (${LANGUAGE},C)
+	CC := gcc
+	LD := gcc
+	EXT := .c
+else
+	CC := g++
+	LD := g++
+	EXT := .cpp
+endif
+
+EXE := a.out
 BUILD_DIR := .build
-EXT := .c
 
-SRCS := \
-	demo/src/a.c \
-	demo/src/b.c
+SRCS :=
 
-INCLUDE_DIRS := \
-	demo/include
+INCLUDE_DIRS :=
 
-MACROS := \
-	FOO=42
+MACROS :=
 
-CC := gcc
-LD := gcc
 CFLAGS := -Wall -Werror -Wextra -Wconversion -Wshadow
 CPPFLAGS :=
 LDFLAGS :=
