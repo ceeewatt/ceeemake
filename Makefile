@@ -23,17 +23,11 @@ RELEASE_OBJS := ${addprefix ${RELEASE_DIR}/${OBJ_DIR}/,${OBJS}}
 DEBUG_DIR := ${BUILD_DIR}/debug
 DEBUG_OBJS := ${addprefix ${DEBUG_DIR}/${OBJ_DIR}/,${OBJS}}
 
-.PHONY: default all release debug configure clean
+.PHONY: default all debug release configure clean
 
-default: release
+default: debug
 
-all: release debug
-
-release: CFLAGS += ${RELEASE_CFLAGS}
-release: CPPFLAGS += ${RELEASE_CPPFLAGS}
-release: LDFLAGS += ${RELEASE_LDFLAGS}
-release: LDLIBS += ${RELEASE_LDLIBS}
-release: ${RELEASE_DIR}/${EXE}
+all: debug release
 
 debug: CFLAGS += ${DEBUG_CFLAGS}
 debug: CPPFLAGS += ${DEBUG_CPPFLAGS}
@@ -41,11 +35,17 @@ debug: LDFLAGS += ${DEBUG_LDFLAGS}
 debug: LDLIBS += ${DEBUG_LDLIBS}
 debug: ${DEBUG_DIR}/${EXE}
 
-${RELEASE_DIR}/${EXE}: ${RELEASE_OBJS}
-	${LD} ${LDFLAGS} ${LDLIBS} ${RELEASE_OBJS} -o $@
+release: CFLAGS += ${RELEASE_CFLAGS}
+release: CPPFLAGS += ${RELEASE_CPPFLAGS}
+release: LDFLAGS += ${RELEASE_LDFLAGS}
+release: LDLIBS += ${RELEASE_LDLIBS}
+release: ${RELEASE_DIR}/${EXE}
 
 ${DEBUG_DIR}/${EXE}: ${DEBUG_OBJS}
 	${LD} ${LDFLAGS} ${LDLIBS} ${DEBUG_OBJS} -o $@
+
+${RELEASE_DIR}/${EXE}: ${RELEASE_OBJS}
+	${LD} ${LDFLAGS} ${LDLIBS} ${RELEASE_OBJS} -o $@
 
 # Dependency generation rule.
 # The generated *.d file will contain:
