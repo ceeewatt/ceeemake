@@ -61,7 +61,7 @@ ${DEP_DIR}/%.d: %.c
 	sed -n '1s/.*:/${subst /,\/,${DEP_DIR}}\/${addsuffix .d,${basename ${notdir $<}}}:/; 1p' $@.$$$$ >> $@; \
 	rm -f $@.$$$$;
 
-include ${DEPS}
+-include ${DEPS}
 
 configure:
 	mkdir -p ${DEP_DIR} ${RELEASE_DIR}/${OBJ_DIR} ${DEBUG_DIR}/${OBJ_DIR}
