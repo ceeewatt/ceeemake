@@ -1,12 +1,7 @@
-#include <stdio.h>
+#include "a.h"
+#include "stdio.h"
 
-extern void print_msg(char *msg);
-
-int main(void)
+void a(void)
 {
-  print_msg("Hello World");
-
-#ifdef FOO
-  printf("FOO = %d\n", FOO);
-#endif
+  printf("Hello from a()\n");
 }

@@ -1,3 +1,4 @@
+# Change if working in C++ project
 LANGUAGE := C
 
 ifeq (${LANGUAGE},C)
@@ -14,6 +15,7 @@ EXE := demo
 BUILD_DIR := .build
 
 SRCS := \
+	src/main.c \
 	src/a.c \
 	src/b.c
 

@@ -1,7 +1,7 @@
 #include "b.h"
-#include <stdio.h>
+#include "stdio.h"
 
-void print_msg(char *msg)
+void b(void)
 {
-  printf("[%d] %s\n", B_ID, msg);
+  printf("Hello from b()\n");
 }
