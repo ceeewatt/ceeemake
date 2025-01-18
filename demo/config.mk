@@ -1,14 +1,16 @@
-# Change if working in C++ project
+# Language specific options (C/C++)
 LANGUAGE := C
 
 ifeq (${LANGUAGE},C)
 	CC := gcc
 	LD := gcc
 	EXT := .c
+	CFLAGS :=
 else
 	CC := g++
 	LD := g++
 	EXT := .cpp
+	CFLAGS := -Wsign-conversion
 endif
 
 EXE := demo
@@ -25,7 +27,7 @@ INCLUDE_DIRS := \
 MACROS := \
 	FOO=42
 
-CFLAGS := -Wall -Werror -Wextra -Wconversion -Wshadow
+CFLAGS := -Wall -Werror -Wextra -Wconversion -Wshadow ${CFLAGS}
 CPPFLAGS :=
 LDFLAGS :=
 LDLIBS :=
@@ -39,3 +41,6 @@ RELEASE_CFLAGS := -O2
 RELEASE_CPPFLAGS := -DNDEBUG
 RELEASE_LDFLAGS :=
 RELEASE_LDLIBS :=
+
+# Remove unnecessary whitespace
+CFLAGS := $(strip ${CFLAGS})
